@@ -2,6 +2,7 @@ package com.giraffelim.entity;
 
 import com.giraffelim.constant.Role;
 import com.giraffelim.dto.MemberFormDto;
+import com.giraffelim.entity.audit.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @Column(name = "MEMBER_ID")

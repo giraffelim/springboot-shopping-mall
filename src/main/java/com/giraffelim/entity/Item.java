@@ -1,7 +1,7 @@
 package com.giraffelim.entity;
 
 import com.giraffelim.constant.ItemSellStatus;
-import com.giraffelim.entity.audit.BaseEntity;
+import com.giraffelim.entity.audit.BaseTimeEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "ITEM")
-public class Item extends BaseEntity {
+public class Item extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
