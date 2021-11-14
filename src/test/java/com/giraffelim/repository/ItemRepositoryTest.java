@@ -20,6 +20,20 @@ class ItemRepositoryTest {
     @Autowired
     private ItemRepository itemRepository;
 
+    @BeforeEach
+    public void createItemList() {
+        for (int i = 1; i <= 10; i++) {
+            Item item = new Item();
+            item.setItemNm("테스트 상품" + i);
+            item.setPrice(10000 + i);
+            item.setItemDetail("테스트 상품 상세 설명" + i);
+            item.setItemSellStatus(ItemSellStatus.SELL);
+            item.setStockNumber(100);
+
+            itemRepository.save(item);
+        }
+    }
+
     @Test
     @DisplayName("상품 저장 테스트")
     void create_item_test() {
@@ -81,18 +95,28 @@ class ItemRepositoryTest {
         assertThat(findItemList).hasSize(4);
     }
 
-    @BeforeEach
-    public void createItemList() {
-        for (int i = 1; i <= 10; i++) {
-            Item item = new Item();
-            item.setItemNm("테스트 상품" + i);
-            item.setPrice(10000 + i);
-            item.setItemDetail("테스트 상품 상세 설명" + i);
-            item.setItemSellStatus(ItemSellStatus.SELL);
-            item.setStockNumber(100);
+    @Test
+    @DisplayName("@Query를 이용한 상품 조회 테스트")
+    void find_by_item_detail_test() {
+        List<Item> findItemList = itemRepository.findByItemDetail("테스트 상품 상세 설명");
 
-            itemRepository.save(item);
+        for (Item item : findItemList) {
+            System.out.println(item.toString());
         }
+
+        assertThat(findItemList).hasSize(10);
+    }
+
+    @Test
+    @DisplayName("nativeQuery 속성을 이용한 상품 조회 테스트")
+    void find_by_item_detail_by_native_test() {
+        List<Item> findItemList = itemRepository.findByItemDetailByNative("테스트 상품 상세 설명");
+
+        for (Item item : findItemList) {
+            System.out.println(item.toString());
+        }
+
+        assertThat(findItemList).hasSize(10);
     }
 
 }
