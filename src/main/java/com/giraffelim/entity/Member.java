@@ -39,7 +39,7 @@ public class Member {
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
         member.setPassword(passwordEncoder.encode(memberFormDto.getPassword()));
-        member.setRole(Role.ROLE_USER);
+        member.setRole(Role.USER);
         return member;
     }
 }
