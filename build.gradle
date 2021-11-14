@@ -32,6 +32,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.5.1'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.3.12.RELEASE'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
