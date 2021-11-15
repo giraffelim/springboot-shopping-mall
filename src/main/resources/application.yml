@@ -2,7 +2,6 @@
 server:
   port: 80
 
-# H2 연결 설정
 spring:
   devtools:
     livereload:
@@ -12,7 +11,7 @@ spring:
     cache: false
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/Downloads/h2/shop
+    url: jdbc:h2:tcp://localhost/~/shop
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -27,6 +26,18 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+# 상품 이미지 업로드 경로
+itemImgLocation: /Users/taeyanglim/shop/item
+
+# 리소스 업로드 경로
+uploadPath: file:///Users/taeyanglim/shop/
+
 
 logging:
   level:
