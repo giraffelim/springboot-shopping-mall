@@ -1,6 +1,7 @@
 package com.giraffelim.entity;
 
 import com.giraffelim.constant.ItemSellStatus;
+import com.giraffelim.dto.ItemFormDto;
 import com.giraffelim.entity.audit.BaseTimeEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,5 +35,13 @@ public class Item extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;  // 상품 판매 상태
+
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
 
 }

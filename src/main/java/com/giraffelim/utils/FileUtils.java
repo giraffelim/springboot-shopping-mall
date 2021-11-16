@@ -9,11 +9,13 @@ import java.util.UUID;
 @Log
 public class FileUtils {
 
+    private FileUtils() { }
+
     public static String uploadFile(String uploadPath, String originFileName, byte[] fileData) throws Exception {
         UUID uuid = UUID.randomUUID();
         String extension = originFileName.substring(originFileName.lastIndexOf("."));
         String savedFileName = uuid.toString() + extension;
-        String fileUploadFullUrl = uploadPath + "/" + savedFileName;
+        String fileUploadFullUrl = uploadPath + savedFileName;
 
         FileOutputStream fos = new FileOutputStream(fileUploadFullUrl);
         fos.write(fileData);
