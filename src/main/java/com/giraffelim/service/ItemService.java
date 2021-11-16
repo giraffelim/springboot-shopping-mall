@@ -1,15 +1,18 @@
 package com.giraffelim.service;
 
 import com.giraffelim.dto.ItemFormDto;
+import com.giraffelim.dto.ItemImgDto;
 import com.giraffelim.entity.Item;
 import com.giraffelim.entity.ItemImg;
 import com.giraffelim.repository.ItemImgRepository;
 import com.giraffelim.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,4 +43,21 @@ public class ItemService {
 
         return item.getId();
     }
+
+    @Transactional(readOnly = true)
+    public ItemFormDto getItemDtl(Long itemId) {
+        List<ItemImg> findItemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        List<ItemImgDto> itemImgDtoList = new ArrayList<>();
+        for (ItemImg itemImg : findItemImgList) {
+            ItemImgDto itemImgDto = ItemImgDto.of(itemImg);
+            itemImgDtoList.add(itemImgDto);
+        }
+
+        Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+        ItemFormDto itemFormDto = ItemFormDto.of(item);
+        itemFormDto.setItemImgDtoList(itemImgDtoList);
+
+        return itemFormDto;
+    }
+
 }
