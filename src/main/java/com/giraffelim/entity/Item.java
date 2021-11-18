@@ -3,7 +3,7 @@ package com.giraffelim.entity;
 import com.giraffelim.constant.ItemSellStatus;
 import com.giraffelim.dto.ItemFormDto;
 import com.giraffelim.entity.audit.BaseEntity;
-import com.giraffelim.entity.audit.BaseTimeEntity;
+import com.giraffelim.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -44,5 +44,14 @@ public class Item extends BaseEntity {
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
+
+    public void removeStock(int stockNumber) {
+        int restStock = this.stockNumber - stockNumber;
+        if (restStock <= 0) {
+            throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
+    }
+
 
 }
