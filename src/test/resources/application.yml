@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: sa123
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+
+# 상품 이미지 업로드 경로
+itemImgLocation: /Users/taeyanglim/shop/item/
+
+# 리소스 업로드 경로
+uploadPath: file:///Users/taeyanglim/shop/
