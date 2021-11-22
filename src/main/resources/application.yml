@@ -18,12 +18,13 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
     database-platform: org.hibernate.dialect.H2Dialect
 
     properties:
       hibernate:
+        default_batch_fetch_size: 100
         show_sql: true
         format_sql: true
 
@@ -33,7 +34,7 @@ spring:
       max-request-size: 100MB
 
 # 상품 이미지 업로드 경로
-itemImgLocation: /Users/taeyanglim/shop/item
+itemImgLocation: /Users/taeyanglim/shop/item/
 
 # 리소스 업로드 경로
 uploadPath: file:///Users/taeyanglim/shop/
