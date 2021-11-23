@@ -1,6 +1,7 @@
 package com.giraffelim.service;
 
 import com.giraffelim.constant.ItemSellStatus;
+import com.giraffelim.constant.OrderStatus;
 import com.giraffelim.dto.OrderDto;
 import com.giraffelim.entity.Item;
 import com.giraffelim.entity.Member;
@@ -83,6 +84,25 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() ->
                 orderService.order(orderDto, member.getEmail())).isInstanceOf(OutOfStockException.class)
                 .hasMessageContaining("상품의 재고가 부족합니다.");
+    }
+
+    @Test
+    @DisplayName("주문 취소 테스트")
+    void order_cancel_test() {
+        Item item = saveItem();
+        Member member = saveMember();
+
+        OrderDto orderDto = new OrderDto();
+        orderDto.setItemId(item.getId());
+        orderDto.setCount(5);
+
+        Long orderId = orderService.order(orderDto, member.getEmail());
+
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        orderService.cancelOrder(orderId);
+
+        Assertions.assertThat(item.getStockNumber()).isEqualTo(10);
+        Assertions.assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.CANCEL);
     }
 
 
