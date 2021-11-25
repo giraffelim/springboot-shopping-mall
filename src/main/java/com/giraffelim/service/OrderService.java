@@ -70,7 +70,7 @@ public class OrderService {
     public boolean validateOrder(Long orderId, String email) {
         Member findMember = memberRepository.findByEmail(email);
         Order findOrder = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
-        if (StringUtils.equals(findMember.getEmail(), findOrder.getMember().getEmail())) {
+        if (!StringUtils.equals(findMember.getEmail(), findOrder.getMember().getEmail())) {
             return false;
         }
 
