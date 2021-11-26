@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
@@ -21,7 +20,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-@TestPropertySource(locations = "classpath:application-test.yml")
 class MemberControllerTest {
 
     @Autowired

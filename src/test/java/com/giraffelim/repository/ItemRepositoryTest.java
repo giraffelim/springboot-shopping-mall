@@ -14,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.TestPropertySource;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
@@ -24,7 +23,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@TestPropertySource(locations = "classpath:application-test.yml")
 class ItemRepositoryTest {
 
     @PersistenceContext
@@ -43,29 +41,6 @@ class ItemRepositoryTest {
             item.setItemSellStatus(ItemSellStatus.SELL);
             item.setStockNumber(100);
 
-            itemRepository.save(item);
-        }
-    }
-
-    @BeforeEach
-    public void createItemList2() {
-        for (int i = 1; i <= 5; i++) {
-            Item item = new Item();
-            item.setItemNm("테스트 상품" + i);
-            item.setPrice(10000 + i);
-            item.setItemDetail("테스트 상품 상세 설명" + i);
-            item.setItemSellStatus(ItemSellStatus.SELL);
-            item.setStockNumber(100);
-            itemRepository.save(item);
-        }
-
-        for (int i = 5; i <= 10; i++) {
-            Item item = new Item();
-            item.setItemNm("테스트 상품" + i);
-            item.setPrice(10000 + i);
-            item.setItemDetail("테스트 상품 상세 설명" + i);
-            item.setItemSellStatus(ItemSellStatus.SOLD_OUT);
-            item.setStockNumber(0);
             itemRepository.save(item);
         }
     }

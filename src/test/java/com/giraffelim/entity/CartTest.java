@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -17,7 +16,6 @@ import javax.persistence.PersistenceContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@TestPropertySource(locations = "classpath:application-test.yml")
 class CartTest {
 
     @Autowired
