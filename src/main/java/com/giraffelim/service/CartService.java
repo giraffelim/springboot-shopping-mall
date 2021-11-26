@@ -1,5 +1,6 @@
 package com.giraffelim.service;
 
+import com.giraffelim.dto.CartDetailDto;
 import com.giraffelim.dto.CartItemDto;
 import com.giraffelim.entity.Cart;
 import com.giraffelim.entity.CartItem;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +48,22 @@ public class CartService {
             cartItemRepository.save(cartItem);
             return cartItem.getId();
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<CartDetailDto> getCartList(String email) {
+        List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
+
+        Member member = memberRepository.findByEmail(email);
+        Cart cart = cartRepository.findByMemberId(member.getId());
+
+        if (cart == null) {
+            return cartDetailDtoList;
+        }
+
+        cartDetailDtoList = cartItemRepository.getCartList(cart.getId());
+
+        return cartDetailDtoList;
     }
 
 }
